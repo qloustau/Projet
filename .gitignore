@@ -10,9 +10,9 @@
 # Cache, session files and logs (Symfony3)
 /var/cache/*
 /var/logs/*
-/var/log/*
+/var/log
 /var/sessions/*
-/.idea/*
+/.idea
 !var/cache/.gitkeep
 !var/logs/.gitkeep
 !var/sessions/.gitkeep
@@ -48,3 +48,4 @@
 
 # Embedded web-server pid file
 /.web-server-pid
+var/log/dev.log
