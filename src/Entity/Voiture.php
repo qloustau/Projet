@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -11,7 +13,13 @@ class Voiture
 {
     /**
      * @ORM\Id()
-     * @ORM\Column(type="string", length=25)
+     * @ORM\GeneratedValue()
+     * @ORM\Column(type="integer")
+     */
+    private $id;
+
+    /**
+     * @ORM\Column(type="string", length=25, unique=true)
      */
     private $immat;
 
@@ -39,6 +47,33 @@ class Voiture
      * @ORM\Column(type="boolean")
      */
     private $disponibilite;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Commentaire", mappedBy="voiture")
+     */
+    private $commentaires;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Utilisation", mappedBy="voiture")
+     */
+    private $utilisations;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Plein", mappedBy="voitures")
+     */
+    private $pleins;
+
+    public function __construct()
+    {
+        $this->commentaires = new ArrayCollection();
+        $this->utilisations = new ArrayCollection();
+        $this->pleins = new ArrayCollection();
+    }
+
+    public function getId(): ?int
+    {
+        return $this->id;
+    }
 
     public function getImmat(): ?string
     {
@@ -107,6 +142,99 @@ class Voiture
     public function setDisponibilite(bool $disponibilite): self
     {
         $this->disponibilite = $disponibilite;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Commentaire[]
+     */
+    public function getCommentaires(): Collection
+    {
+        return $this->commentaires;
+    }
+
+    public function addCommentaire(Commentaire $commentaire): self
+    {
+        if (!$this->commentaires->contains($commentaire)) {
+            $this->commentaires[] = $commentaire;
+            $commentaire->setVoiture($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCommentaire(Commentaire $commentaire): self
+    {
+        if ($this->commentaires->contains($commentaire)) {
+            $this->commentaires->removeElement($commentaire);
+            // set the owning side to null (unless already changed)
+            if ($commentaire->getVoiture() === $this) {
+                $commentaire->setVoiture(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Utilisation[]
+     */
+    public function getUtilisation(): Collection
+    {
+        return $this->utilisations;
+    }
+
+    public function addUtilisation(Utilisation $utilisation): self
+    {
+        if (!$this->utilisations->contains($utilisation)) {
+            $this->utilisations[] = $utilisation;
+            $utilisation->setVoiture($this);
+        }
+
+        return $this;
+    }
+
+    public function removeUtilisation(Utilisation $utilisation): self
+    {
+        if ($this->utilisations->contains($utilisation)) {
+            $this->utilisations->removeElement($utilisation);
+            // set the owning side to null (unless already changed)
+            if ($utilisation->getVoiture() === $this) {
+                $utilisation->setVoiture(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Plein[]
+     */
+    public function getPleins(): Collection
+    {
+        return $this->pleins;
+    }
+
+    public function addPlein(Plein $plein): self
+    {
+        if (!$this->pleins->contains($plein)) {
+            $this->pleins[] = $plein;
+            $plein->setVoiture($this);
+        }
+
+        return $this;
+    }
+
+    public function removePlein(Plein $plein): self
+    {
+        if ($this->pleins->contains($plein)) {
+            $this->pleins->removeElement($plein);
+            // set the owning side to null (unless already changed)
+            if ($plein->getVoiture() === $this) {
+                $plein->setVoiture(null);
+            }
+        }
 
         return $this;
     }
