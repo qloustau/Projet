@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Voiture;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -12,8 +13,13 @@ class DefaultController extends AbstractController
      */
     public function index()
     {
+
+        $repository = $this->getDoctrine()->getRepository(Voiture::class);
+
+        $voitures = $repository->selectionVoiture();
+
         return $this->render('default/index.html.twig', [
-            'controller_name' => 'DefaultController',
+            'voitures' => $voitures,
         ]);
     }
 
@@ -56,4 +62,7 @@ class DefaultController extends AbstractController
             'controller_name' => 'DefaultController',
         ]);
     }
+
+
+
 }

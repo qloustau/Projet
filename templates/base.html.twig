@@ -4,7 +4,6 @@
         <meta charset="UTF-8">
 
         <title>{% block title %}Gestion véhicule{% endblock %}</title>
-        {% block stylesheets %}{% endblock %}
 
         {% block stylesheets %}
             <link rel="stylesheet" type="text/css" href="{{ asset('css/bootstrap.min.css') }}">
@@ -13,6 +12,7 @@
 
     </head>
     <body>
+        {{ include('__menu.html.twig') }}
         {% block body %}{% endblock %}
         {% block javascripts %}
             <script src="{{ asset('js/bootstrap.min.js') }}"></script>

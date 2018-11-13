@@ -1,16 +1,29 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Accueil{% endblock %}
+{% block title %}{{ parent() }} - Accueil{% endblock %}
 
 {% block body %}
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ 'src/Controller/DefaultController.php'|file_link(0) }}">src/Controller/DefaultController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'templates/default/index.html.twig'|file_link(0) }}">templates/default/index.html.twig</a></code></li>
-    </ul>
-</div>
+        <div class="container">
+            <div class="row">
+    {% for voiture in voitures %}
+                <div class="card col-lg-4">
+                    <img class="card-img-top" src="..." alt="Card image cap">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ voiture.marque }}</h5>
+                        <p class="card-text">{{ voiture.descriptif }}</p>
+                        <p class="card-text">{{ voiture.kmtotal }} km</p>
+                        {% if voiture.disponibilite == true %}
+                            <p class="card-text">Voiture disponible</p>
+                        {% endif %}
+                        {% if voiture.disponibilite == false %}
+                            <p class="card-text">Voiture non disponible</p>
+                        {% endif %}
+                        <a href="{{ path('location') }}" class="btn btn-primary">Location</a>
+                    </div>
+                </div>
+    {% endfor %}
+            </div>
+        </div>
 
 {% endblock %}

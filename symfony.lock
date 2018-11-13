@@ -83,6 +83,9 @@
     "fig/link-util": {
         "version": "1.0.0"
     },
+    "fzaninotto/faker": {
+        "version": "v1.8.0"
+    },
     "jdorn/sql-formatter": {
         "version": "v1.2.17"
     },
@@ -94,6 +97,9 @@
     },
     "ocramius/proxy-manager": {
         "version": "2.1.1"
+    },
+    "pelmered/fake-car": {
+        "version": "1.2.0"
     },
     "phpdocumentor/reflection-common": {
         "version": "1.0.1"
