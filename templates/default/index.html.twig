@@ -8,7 +8,7 @@
             <div class="row">
     {% for voiture in voitures %}
                 <div class="card col-lg-4">
-                    <img class="card-img-top" src="..." alt="Card image cap">
+                    <img class="card-img-top" src="{{ voiture.images }}" alt="Card image cap">
                     <div class="card-body">
                         <h5 class="card-title">{{ voiture.marque }}</h5>
                         <p class="card-text">{{ voiture.descriptif }}</p>

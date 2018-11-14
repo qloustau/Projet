@@ -2,12 +2,24 @@
 
 namespace App\DataFixtures;
 
+use App\Entity\Personne;
 use App\Entity\Voiture;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+
+
+
 
 class AppFixtures extends Fixture
 {
+    private $encoder;
+
+    public function __construct(UserPasswordEncoderInterface $encoder)
+    {
+        $this->encoder = $encoder;
+    }
+
     public function load(ObjectManager $manager)
     {
         // create 20 products! Bam!
@@ -17,13 +29,13 @@ class AppFixtures extends Fixture
 
 
         $nombrekm = [
-            '15454487',
-            '21654644',
+            '154544',
+            '216546',
             '65333',
             '97444',
             '12000',
-            '15454487',
-            '21654644',
+            '154544',
+            '216546',
             '65333',
             '97444',
             '12000',
@@ -67,6 +79,17 @@ class AppFixtures extends Fixture
             $manager->persist($voiture);
         }
 
+        $manager->flush();
+
+        $user = new Personne();
+        $user->setNom('Doe');
+        $user->setPrenom('John');
+        $user->setEmail('test@gmail.com');
+
+        $password = $this->encoder->encodePassword($user, 'test');
+        $user->setMdp($password);
+
+        $manager->persist($user);
         $manager->flush();
     }
 }
