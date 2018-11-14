@@ -1,7 +1,31 @@
 header{
     height: 90px;
+    background: #02547D;
+    margin-bottom: 30px;
+}
+header a{
+   color: #fff;
+}
+
+header a:hover{
+    color: #E1F7E7;
+    text-decoration: none;
 }
 
 header img {
     width: 10%;
 }
+
+.card img {
+    width: 50%;
+    margin: 10px auto;
+}
+
+.card {
+    text-align: center;
+    border: none;
+    border: 0.5px solid black;
+}
+
+
+
