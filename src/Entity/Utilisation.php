@@ -61,7 +61,7 @@ class Utilisation
     private $email;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Plein", mappedBy="utilisations")
+     * @ORM\OneToMany(targetEntity="App\Entity\Plein", mappedBy="utilisation")
      */
     private $pleins;
 

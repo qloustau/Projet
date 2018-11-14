@@ -59,7 +59,7 @@ class Voiture
     private $utilisations;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Plein", mappedBy="voitures")
+     * @ORM\OneToMany(targetEntity="App\Entity\Plein", mappedBy="voiture")
      */
     private $pleins;
 
