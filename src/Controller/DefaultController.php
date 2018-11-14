@@ -55,12 +55,21 @@ class DefaultController extends AbstractController
     }
 
     /**
-     * @Route("/location", name="location")
+     * @Route("/location/{id}", name="location")
      */
     public function locationPage()
     {
-        return $this->render('default/location.html.twig', [
-            'controller_name' => 'DefaultController',
+        $repository = $this->getDoctrine()
+            ->getRepository(Voiture::class)
+        ;
+
+
+        $voiture = $repository->infoPourChaqueVoiture($request->get('id'));
+
+        dump($voiture);
+
+        return $this->render('default/info.html.twig', [
+            'voitures' => $voiture,
         ]);
     }
 
