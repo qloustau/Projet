@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Voiture;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
 class DefaultController extends AbstractController
@@ -24,12 +25,22 @@ class DefaultController extends AbstractController
     }
 
     /**
-     * @Route("/info", name="info")
+     * @Route("/info/{id}", name="info")
      */
-    public function infoPage()
+    public function infoPage(Request $request)
     {
+
+        $repository = $this->getDoctrine()
+                    ->getRepository(Voiture::class)
+        ;
+
+
+        $voiture = $repository->infoPourChaqueVoiture($request->get('id'));
+
+        dump($voiture);
+
         return $this->render('default/info.html.twig', [
-            'controller_name' => 'DefaultController',
+            'voitures' => $voiture,
         ]);
     }
 

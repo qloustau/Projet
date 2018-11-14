@@ -1,10 +1,33 @@
 {% extends 'base.html.twig' %}
 
+{% block title %}
+    {{ parent () }} - Info
+{% endblock %}
+
 {% block body %}
 
+    <div class="container">
+        <div class="row">
+            {% for voiture in voitures %}
+                <div class="card col-lg-4">
+                    <img class="card-img-top" src="{{ voiture.images }}" alt="Card image cap">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ voiture.marque }}</h5>
+                        <p class="card-text">{{ voiture.descriptif }}</p>
+                        <p class="card-text">{{ voiture.kmtotal }} km</p>
+                        {% if voiture.disponibilite == true %}
+                            <p class="card-text">Voiture disponible</p>
+                        {% endif %}
+                        {% if voiture.disponibilite == false %}
+                            <p class="card-text">Voiture non disponible</p>
+                        {% endif %}
+                        <a href="{{ path('info',{'id': voiture.id}) }}" class="btn btn-primary">Location</a>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
 {% endblock %}
 
-{% block title %}
- {{ parent () }} - Info
-{% endblock %}
+
 

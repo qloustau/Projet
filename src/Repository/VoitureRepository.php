@@ -19,7 +19,8 @@ class VoitureRepository extends ServiceEntityRepository
         parent::__construct($registry, Voiture::class);
     }
 
-    public function selectionVoiture() {
+    public function selectionVoiture()
+    {
         $entityManager = $this->getEntityManager();
 
         $query = $entityManager->createQuery(
@@ -30,4 +31,20 @@ class VoitureRepository extends ServiceEntityRepository
         return $query->execute();
     }
 
+    public function infoPourChaqueVoiture(int $id)
+    {
+
+        $dql = <<<DQL
+    SELECT v
+    FROM App\Entity\Voiture v
+    WHERE v = :id
+DQL;
+
+
+        return $this
+            ->getEntityManager()
+            ->createQuery($dql)->setParameter('id', $id)
+            ->getResult();
+
+    }
 }

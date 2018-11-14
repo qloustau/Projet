@@ -19,7 +19,7 @@
                         {% if voiture.disponibilite == false %}
                             <p class="card-text">Voiture non disponible</p>
                         {% endif %}
-                        <a href="{{ path('location') }}" class="btn btn-primary">Location</a>
+                        <a href="{{ path('info',{'id': voiture.id}) }}" class="btn btn-primary">Location</a>
                     </div>
                 </div>
     {% endfor %}
