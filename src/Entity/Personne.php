@@ -55,7 +55,7 @@ class Personne implements UserInterface
     private $utilisations;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Role", mappedBy="user")
+     * @ORM\ManyToMany(targetEntity="App\Entity\Role", mappedBy="personnes")
      */
     private $roles;
 
@@ -249,9 +249,13 @@ class Personne implements UserInterface
          * @return (Role|string)[] The user roles
          */
         public
-        function getRoles(): Collection
+        function getRoles(): array
         {
-            return $this->roles->toArray();
+            $roles = [];
+            $this->roles->map(function(Role $role)use (&$roles){
+                $roles[]= $role->getRole();
+            });
+            return $roles;
         }
 
         public
