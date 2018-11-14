@@ -19,32 +19,32 @@ class VoitureRepository extends ServiceEntityRepository
         parent::__construct($registry, Voiture::class);
     }
 
-    // /**
-    //  * @return Voiture[] Returns an array of Voiture objects
-    //  */
-    /*
-    public function findByExampleField($value)
+    public function selectionVoiture()
     {
-        return $this->createQueryBuilder('v')
-            ->andWhere('v.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('v.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
-    }
-    */
+        $entityManager = $this->getEntityManager();
 
-    /*
-    public function findOneBySomeField($value): ?Voiture
-    {
-        return $this->createQueryBuilder('v')
-            ->andWhere('v.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
+        $query = $entityManager->createQuery(
+            'SELECT v
+        FROM App\Entity\Voiture v'
+        );
+
+        return $query->execute();
     }
-    */
+
+    public function infoPourChaqueVoiture(int $id)
+    {
+
+        $dql = <<<DQL
+    SELECT v
+    FROM App\Entity\Voiture v
+    WHERE v = :id
+DQL;
+
+
+        return $this
+            ->getEntityManager()
+            ->createQuery($dql)->setParameter('id', $id)
+            ->getResult();
+
+    }
 }

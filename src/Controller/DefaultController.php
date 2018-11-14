@@ -2,28 +2,45 @@
 
 namespace App\Controller;
 
+use App\Entity\Voiture;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
 class DefaultController extends AbstractController
 {
     /**
-     * @Route("/", name="default")
+     * @Route("/", name="home")
      */
     public function index()
     {
+
+        $repository = $this->getDoctrine()->getRepository(Voiture::class);
+
+        $voitures = $repository->selectionVoiture();
+
         return $this->render('default/index.html.twig', [
-            'controller_name' => 'DefaultController',
+            'voitures' => $voitures,
         ]);
     }
 
     /**
-     * @Route("/info", name="info")
+     * @Route("/info/{id}", name="info")
      */
-    public function infoPage()
+    public function infoPage(Request $request)
     {
+
+        $repository = $this->getDoctrine()
+                    ->getRepository(Voiture::class)
+        ;
+
+
+        $voiture = $repository->infoPourChaqueVoiture($request->get('id'));
+
+        dump($voiture);
+
         return $this->render('default/info.html.twig', [
-            'controller_name' => 'DefaultController',
+            'voitures' => $voiture,
         ]);
     }
 
@@ -38,12 +55,21 @@ class DefaultController extends AbstractController
     }
 
     /**
-     * @Route("/location", name="location")
+     * @Route("/location/{id}", name="location")
      */
     public function locationPage()
     {
-        return $this->render('default/location.html.twig', [
-            'controller_name' => 'DefaultController',
+        $repository = $this->getDoctrine()
+            ->getRepository(Voiture::class)
+        ;
+
+
+        $voiture = $repository->infoPourChaqueVoiture($request->get('id'));
+
+        dump($voiture);
+
+        return $this->render('default/info.html.twig', [
+            'voitures' => $voiture,
         ]);
     }
 
@@ -56,4 +82,7 @@ class DefaultController extends AbstractController
             'controller_name' => 'DefaultController',
         ]);
     }
+
+
+
 }

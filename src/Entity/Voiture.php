@@ -63,6 +63,25 @@ class Voiture
      */
     private $pleins;
 
+    /**
+     * @ORM\Column(type="string")
+     */
+    private $images;
+
+
+    public function getImages()
+    {
+        return $this->images;
+    }
+
+
+    public function setImages($images): self
+    {
+         $this->images = $images;
+         return $this;
+    }
+
+
     public function __construct()
     {
         $this->commentaires = new ArrayCollection();
