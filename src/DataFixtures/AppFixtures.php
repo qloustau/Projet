@@ -63,6 +63,7 @@ class AppFixtures extends Fixture
             $voiture->setDescriptif($faker->vehicleType);
             $voiture->setDisponibilite($disponibilites [$i]);
             $voiture->setReservoir($reservoirs [$i]);
+            $voiture->setImages($faker->imageUrl(100,100));
             $manager->persist($voiture);
         }
 

@@ -6,9 +6,15 @@
             </div>
             <div class="col-lg-4">
                 <nav class="nav nav-bar">
-                    <li><a href="{{ path('app_login') }}">Connexion </a></li>
-                    |
-                    <li><a href="{{ path('logout') }}">Deconnexion</a></li>
+                    {% if not is_granted('IS_AUTHENTICATED_FULLY') %}
+                        <li><a href="{{ path('app_login') }}">Connexion </a></li>
+                    {% endif %}
+
+                    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                        <p>Email: {{ app.user.email }}</p> |
+                        <p> Bonjour  {{ app.user.prenom }}</p>
+                        <li><a href="{{ path('logout') }}">Deconnexion</a></li>
+                    {% endif %}
                 </nav>
             </div>
         </div>
