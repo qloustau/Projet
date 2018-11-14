@@ -54,10 +54,16 @@ class Personne implements UserInterface
      */
     private $utilisations;
 
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Role", mappedBy="user")
+     */
+    private $roles;
+
     public function __construct()
     {
         $this->commentaires = new ArrayCollection();
         $this->utilisations = new ArrayCollection();
+        $this->roles = new ArrayCollection();
     }
 
 
@@ -189,6 +195,7 @@ class Personne implements UserInterface
     }
 
     /**
+
      * Returns the roles granted to the user.
      *
      *     public function getRoles()
@@ -250,5 +257,31 @@ class Personne implements UserInterface
      */
     public function eraseCredentials()
     {
+
+     * @return Collection|Utilisation[]
+     */
+    public function getRoles(): Collection
+    {
+        return $this->roles->toArray();
+    }
+
+    public function addRole(Role $role): self
+    {
+        if (!$this->roles->contains($role)) {
+            $this->roles[] = $role;
+            $role->addUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeRole(Role $role): self
+    {
+        if ($this->roles->contains($role)) {
+            $this->roles->removeElement($role);
+            $role->removeUser($this);
+        }
+
+        return $this;
     }
 }
