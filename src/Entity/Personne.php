@@ -194,25 +194,6 @@ class Personne implements UserInterface
         return $this;
     }
 
-    /**
-
-     * Returns the roles granted to the user.
-     *
-     *     public function getRoles()
-     *     {
-     *         return array('ROLE_USER');
-     *     }
-     *
-     * Alternatively, the roles might be stored on a ``roles`` property,
-     * and populated in any number of different ways when the user object
-     * is created.
-     *
-     * @return (Role|string)[] The user roles
-     */
-    public function getRoles()
-    {
-        return array('ROLE_USER');
-    }
 
     /**
      * Returns the password used to authenticate the user.
@@ -256,32 +237,42 @@ class Personne implements UserInterface
      * the plain-text password is stored on this object.
      */
     public function eraseCredentials()
-    {
+    {}
+        /**
+         * Returns the roles granted to the user.
 
-     * @return Collection|Utilisation[]
-     */
-    public function getRoles(): Collection
-    {
-        return $this->roles->toArray();
-    }
-
-    public function addRole(Role $role): self
-    {
-        if (!$this->roles->contains($role)) {
-            $this->roles[] = $role;
-            $role->addUser($this);
+         *
+         * Alternatively, the roles might be stored on a ``roles`` property,
+         * and populated in any number of different ways when the user object
+         * is created.
+         *
+         * @return (Role|string)[] The user roles
+         */
+        public
+        function getRoles(): Collection
+        {
+            return $this->roles->toArray();
         }
 
-        return $this;
-    }
+        public
+        function addRole(Role $role): self
+        {
+            if (!$this->roles->contains($role)) {
+                $this->roles[] = $role;
+                $role->addUser($this);
+            }
 
-    public function removeRole(Role $role): self
-    {
-        if ($this->roles->contains($role)) {
-            $this->roles->removeElement($role);
-            $role->removeUser($this);
+            return $this;
         }
 
-        return $this;
-    }
+        public
+        function removeRole(Role $role): self
+        {
+            if ($this->roles->contains($role)) {
+                $this->roles->removeElement($role);
+                $role->removeUser($this);
+            }
+
+            return $this;
+        }
 }

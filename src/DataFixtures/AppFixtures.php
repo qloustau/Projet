@@ -3,9 +3,11 @@
 namespace App\DataFixtures;
 
 use App\Entity\Personne;
+use App\Entity\Role;
 use App\Entity\Voiture;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\ORM\EntityManager;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 
@@ -79,16 +81,38 @@ class AppFixtures extends Fixture
             $manager->persist($voiture);
         }
 
+        $RoleUser = new Role();
+        $RoleUser->setName('user');
+        $RoleUser->setRole('ROLE_USER');
+        $manager->persist($RoleUser);
+
+        $RoleAdmin = new Role();
+        $RoleAdmin->setName('admin');
+        $RoleAdmin->setRole('ROLE_ADMIN');
+        $manager->persist($RoleAdmin);
+
+
         $manager->flush();
 
         $user = new Personne();
         $user->setNom('Doe');
         $user->setPrenom('John');
         $user->setEmail('test@gmail.com');
+        $user->addRole($RoleUser);
 
         $password = $this->encoder->encodePassword($user, 'test');
         $user->setMdp($password);
 
+        $admin = new Personne();
+        $admin->setNom('admin');
+        $admin->setPrenom('Admin');
+        $admin->setEmail('admin@gmail.com');
+        $admin->addRole($RoleAdmin);
+
+        $password = $this->encoder->encodePassword($admin, 'admin');
+        $admin->setMdp($password);
+
+        $manager->persist($admin);
         $manager->persist($user);
         $manager->flush();
     }
