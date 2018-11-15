@@ -24,7 +24,6 @@ class ResaType extends AbstractType
                     'Temporaire' => '',
                     'Long terme' => '',
                     'Formation' => '',
-                    'Autre...' => '',
                 ]
             ))
             ->add('dateDebutUtilisation', DateType::class, array(
@@ -39,6 +38,8 @@ class ResaType extends AbstractType
                     'Nantes (Saint Herblain)' => '',
                     'Nantes (Hub Creatic)' => '',
                     'Rennes (Chartres de Bretagne)' => '',
+                    'Niort' => '',
+                    'Autre' => '',
                 ]
             ])
             ->add('email', EmailType::class)
