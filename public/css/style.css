@@ -83,7 +83,12 @@ input {
 }
 
 
+/* Footer */
 
+footer {
+    background-color: #000;
+    margin-top: 30px;
+;}
 
 
 

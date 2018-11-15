@@ -7,21 +7,18 @@
         <div class="container">
             <div class="row">
     {% for voiture in voitures %}
+        {% if voiture.disponibilite == true %}
                 <div class="card col-lg-3">
                     <img class="card-img-top" src="{{ voiture.images }}" alt="Card image cap">
                     <div class="card-body">
                         <h5 class="card-title">{{ voiture.marque }}</h5>
                         <p class="card-text">{{ voiture.descriptif }}</p>
                         <p class="card-text">{{ voiture.kmtotal }} km</p>
-                        {% if voiture.disponibilite == true %}
-                            <p class="card-text">Voiture disponible</p>
-                        {% endif %}
-                        {% if voiture.disponibilite == false %}
-                            <p class="card-text">Voiture non disponible</p>
-                        {% endif %}
-                        <a href="{{ path('info',{'id': voiture.id}) }}" class="btn btn-primary">Location</a>
+
+                        <a href="{{ path('info',{'id': voiture.id}) }}" class="btn btn-primary">Réservation</a>
                     </div>
                 </div>
+            {% endif %}
     {% endfor %}
             </div>
         </div>
