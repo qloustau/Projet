@@ -29,7 +29,6 @@ class ResaType extends AbstractType
             ))
             ->add('dateDebutUtilisation', DateType::class, array(
                 'widget' => 'single_text',
-
             ))
             ->add('dateFinUtilisation',DateType::class, array(
                 'widget' => 'single_text',
