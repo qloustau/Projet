@@ -2,7 +2,9 @@
 
 namespace App\Controller;
 
+use App\Entity\Utilisation;
 use App\Entity\Voiture;
+use App\Form\ResaType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -55,21 +57,28 @@ class DefaultController extends AbstractController
     }
 
     /**
-     * @Route("/location/{id}", name="location")
+     * @Route("/location", name="location")
      */
-    public function locationPage()
+    public function locationPage(Request $request)
     {
-        $repository = $this->getDoctrine()
-            ->getRepository(Voiture::class)
-        ;
+        $utilisation = New Utilisation();
+        $form = $this->createForm(ResaType::class, $utilisation);
 
+        $form->handleRequest($request);
 
-        $voiture = $repository->infoPourChaqueVoiture($request->get('id'));
+        if ($form->isSubmitted() && $form->isValid()) {
 
-        dump($voiture);
+            // 4) save the User!
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($utilisation);
+            $entityManager->flush();
+            // ... do any other work - like sending them an email, etc
+            // maybe set a "flash" success message for the user
+            return $this->redirectToRoute('location');
+        }
 
-        return $this->render('default/info.html.twig', [
-            'voitures' => $voiture,
+        return $this->render('default/location.html.twig', [
+            'form' => $form->createView(),
         ]);
     }
 

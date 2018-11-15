@@ -66,6 +66,11 @@ class Personne implements UserInterface
         $this->roles = new ArrayCollection();
     }
 
+    public function __toString()
+    {
+        return $this->nom;
+    }
+
 
     public function getId(): ?int
     {
