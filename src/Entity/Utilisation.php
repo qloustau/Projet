@@ -5,6 +5,7 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UtilisationRepository")
@@ -46,7 +47,7 @@ class Utilisation
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Voiture", inversedBy="utilisations")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=true)
      */
     private $voiture;
 
@@ -63,6 +64,8 @@ class Utilisation
     public function __construct()
     {
         $this->pleins = new ArrayCollection();
+        $this->dateDebutUtilisation = new \DateTime();
+        $this->dateFinUtilisation = new \DateTime();
     }
 
 

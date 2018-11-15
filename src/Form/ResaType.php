@@ -5,12 +5,14 @@ namespace App\Form;
 use App\Entity\Utilisation;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\DateTime;
 
 class ResaType extends AbstractType
 {
@@ -26,10 +28,11 @@ class ResaType extends AbstractType
                 ]
             ))
             ->add('dateDebutUtilisation', DateType::class, array(
-                'format' => 'dd-MM-yyyy'
+                'widget' => 'single_text',
+
             ))
             ->add('dateFinUtilisation',DateType::class, array(
-        'format' => 'dd-MM-yyyy'
+                'widget' => 'single_text',
         ))
             ->add('destination' , ChoiceType::class, [
                 'choices' => [

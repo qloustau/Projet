@@ -12,7 +12,6 @@
         <div class="container">
             <div class="row">
     {% for voiture in voitures %}
-        {% if voiture.disponibilite == true %}
                 <div class="card col-lg-3">
                     <img class="card-img-top" src="{{ voiture.images }}" alt="Card image cap">
                     <div class="card-body">
@@ -23,7 +22,6 @@
                         <a href="{{ path('location') }}" class="btn btn-primary">Réservation</a>
                     </div>
                 </div>
-            {% endif %}
     {% endfor %}
             </div>
         </div>

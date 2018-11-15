@@ -25,7 +25,8 @@ class VoitureRepository extends ServiceEntityRepository
 
         $query = $entityManager->createQuery(
             'SELECT v
-            FROM App\Entity\Voiture v'
+            FROM App\Entity\Voiture v
+            WHERE v.disponibilite = true'
         );
 
         return $query->execute();
