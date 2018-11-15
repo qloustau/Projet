@@ -4,6 +4,11 @@
 
 {% block body %}
 
+    {{ form_start(form) }}
+    {{ form_label(form.lieuReception) }}
+    {{ form_widget(form.lieuReception) }}
+    <input type="submit" value="Search" name="bouton"/>
+    {{ form_end(form) }}
         <div class="container">
             <div class="row">
     {% for voiture in voitures %}

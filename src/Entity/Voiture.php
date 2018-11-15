@@ -68,6 +68,11 @@ class Voiture
      */
     private $images;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $lieuReception;
+
 
     public function getImages()
     {
@@ -254,6 +259,18 @@ class Voiture
                 $plein->setVoiture(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getLieuReception(): ?string
+    {
+        return $this->lieuReception;
+    }
+
+    public function setLieuReception(string $lieuReception): self
+    {
+        $this->lieuReception = $lieuReception;
 
         return $this;
     }

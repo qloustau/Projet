@@ -34,11 +34,6 @@ class Utilisation
     private $dateFinUtilisation;
 
     /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $lieuReception;
-
-    /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $destination;
@@ -108,18 +103,6 @@ class Utilisation
     public function setDateFinUtilisation(?\DateTimeInterface $dateFinUtilisation): self
     {
         $this->dateFinUtilisation = $dateFinUtilisation;
-
-        return $this;
-    }
-
-    public function getLieuReception(): ?string
-    {
-        return $this->lieuReception;
-    }
-
-    public function setLieuReception(string $lieuReception): self
-    {
-        $this->lieuReception = $lieuReception;
 
         return $this;
     }
