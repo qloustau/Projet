@@ -1,4 +1,4 @@
-/***** En tete *****/
+/* Header */
 body {
     background: -moz-linear-gradient(45deg, rgba(255,0,255,1) 0%, rgba(0,255,255,1) 100%) no-repeat; /* ff3.6+ */
     background: -webkit-gradient(linear, left bottom, right top, color-stop(0%, rgba(255,0,255,1)), color-stop(100%, rgba(0,255,255,1))); /* safari4+,chrome */
@@ -17,6 +17,24 @@ header a{
    color: #fff;
 }
 
+header a:hover{
+    color: #E1F7E7;
+    text-decoration: none;
+}
+
+header img {
+    width: 10%;
+}
+
+/* Menu */
+nav {
+    padding-top: 1.50em;
+}
+
+nav li {
+    padding-left: 20px;
+}
+
 /* Container */
 .container {
     background: #fff;
@@ -29,15 +47,8 @@ header a{
     -webkit-border-radius: 20px;
     border-radius: 20px;
 }
-header a:hover{
-    color: #E1F7E7;
-    text-decoration: none;
-}
 
-header img {
-    width: 10%;
-}
-
+/* Cars */
 .card img {
     width: 100%;
     margin: 10px auto;
@@ -53,12 +64,7 @@ header img {
     border: none;
 }
 
-
-nav {
-    padding-top: 1.50em;
-}
-
-
+/* Button "Reserver" */
 button a {
     color: #fff;
 }
@@ -67,10 +73,7 @@ button a:hover {
     text-decoration: none;
 }
 
-nav li {
-    padding-left: 20px;
-}
-
+/* Form */
 form {
     padding: 100px 150px 400px 150px;
 }
