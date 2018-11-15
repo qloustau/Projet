@@ -7,7 +7,6 @@ use App\Entity\Role;
 use App\Entity\Voiture;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
-use Doctrine\ORM\EntityManager;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 
@@ -78,6 +77,7 @@ class AppFixtures extends Fixture
             $voiture->setDisponibilite($disponibilites [$i]);
             $voiture->setReservoir($reservoirs [$i]);
             $voiture->setImages($faker->imageUrl(100,100));
+            $voiture->setLieuReception($faker->city);
             $manager->persist($voiture);
         }
 

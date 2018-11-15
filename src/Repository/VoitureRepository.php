@@ -25,7 +25,7 @@ class VoitureRepository extends ServiceEntityRepository
 
         $query = $entityManager->createQuery(
             'SELECT v
-        FROM App\Entity\Voiture v'
+            FROM App\Entity\Voiture v'
         );
 
         return $query->execute();
@@ -33,18 +33,37 @@ class VoitureRepository extends ServiceEntityRepository
 
     public function infoPourChaqueVoiture(int $id)
     {
+        $entityManager = $this->getEntityManager();
 
-        $dql = <<<DQL
-    SELECT v
-    FROM App\Entity\Voiture v
-    WHERE v = :id
-DQL;
+        $query = $entityManager->createQuery(
+            'SELECT v
+            FROM App\Entity\Voiture v
+            WHERE v = :id'
+        );
 
+        $query->setParameter('id', $id);
 
-        return $this
-            ->getEntityManager()
-            ->createQuery($dql)->setParameter('id', $id)
-            ->getResult();
+        return $query->getResult();
+    }
 
+    public function recupererParLieuxDeReception(): array{
+
+        $entityManager = $this->getEntityManager();
+
+        $query = $entityManager->createQuery(
+            'SELECT DISTINCT v.lieuReception
+                FROM App\Entity\Voiture v
+                WHERE v.disponibilite = true'
+        );
+        return array_flip(array_column($query->getScalarResult(), "lieuReception"));
+    }
+
+    public function selectionVoitureParLieuReception(string $lieu){
+        $query = $this->getEntityManager()->createQuery("
+            SELECT v FROM App\Entity\Voiture v WHERE v.lieuReception LIKE :lieu
+        ");
+        $query->setParameter('lieu', '%'.$lieu.'%');
+
+        return $query->getResult();
     }
 }
