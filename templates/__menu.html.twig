@@ -1,11 +1,8 @@
 <header>
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-8">
-                <img src="{{ asset('img/eni-logo.png') }}" alt="Eni logo">
-            </div>
-            <div class="col-lg-4">
+
+        <div class="row justify-content-center">
                 <nav class="nav nav-bar">
+                    <li><a href="{{ path('home') }}">Accueil</a></li>
                     {% if not is_granted('IS_AUTHENTICATED_FULLY') %}
                         <li><a href="{{ path('app_login') }}">Connexion </a></li>
                     {% endif %}
@@ -16,7 +13,5 @@
                         <li><a href="{{ path('logout') }}">Deconnexion</a></li>
                     {% endif %}
                 </nav>
-            </div>
         </div>
-    </div>
 </header>

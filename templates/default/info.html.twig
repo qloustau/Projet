@@ -7,22 +7,22 @@
 {% block body %}
 
     <div class="container">
-        <div class="row">
+        <div class="row text-center">
             {% for voiture in voitures %}
-                <div class="card col-lg-4">
-                    <img class="card-img-top" src="{{ voiture.images }}" alt="Card image cap">
-                    <div class="card-body">
-                        <h5 class="card-title">{{ voiture.marque }}</h5>
-                        <p class="card-text">{{ voiture.descriptif }}</p>
-                        <p class="card-text">{{ voiture.kmtotal }} km</p>
-                        {% if voiture.disponibilite == true %}
-                            <p class="card-text">Voiture disponible</p>
-                        {% endif %}
-                        {% if voiture.disponibilite == false %}
-                            <p class="card-text">Voiture non disponible</p>
-                        {% endif %}
-                        <a href="{{ path('info',{'id': voiture.id}) }}" class="btn btn-primary">Location</a>
-                    </div>
+                <div class="col-lg-12">
+                    <img src="{{ voiture.images }}" alt="image voiture" width="30%">
+                </div>
+                <div class="col-lg-12 text-center">
+                    <br>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam aliquid aut commodi
+                        consequuntur cumque deleniti dolor eaque eius et explicabo incidunt ipsam ipsum iure, magnam magni
+                        nihil officia omnis optio quidem quis sapiente sunt, totam ullam, velit veniam voluptas voluptate voluptatum.
+                        Accusantium assumenda consequuntur cumque deleniti dolor est eum excepturi expedita fuga molestiae nemo officia placeat
+                        quia quis quod reiciendis repudiandae saepe sed, unde voluptatibus! Aliquam ex neque nisi perferendis saepe sequi, voluptates! Ab aliquam at consectetur consequatur consequuntur debitis dolore et eum ex facere fugit illum ipsum iure labore molestiae, natus nobis obcaecati odit perspiciatis placeat possimus qui quis quod
+                        recusandae repudiandae totam ullam vel vitae voluptas voluptate. Hic labore nam officiis quasi quibusdam suscipit vero. Dicta, magnam quia.
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam aut consectetur eligendi eos eum, expedita facere, in ipsum labore magnam nihil obcaecati quam quisquam rem similique tempora totam velit veritatis?
+                    </p>
+                    <button class="btn btn-primary"><a href="">Réserver la voiture</a></button>
                 </div>
             {% endfor %}
         </div>
