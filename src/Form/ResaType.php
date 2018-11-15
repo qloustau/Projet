@@ -6,6 +6,7 @@ use App\Entity\Utilisation;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -22,17 +23,15 @@ class ResaType extends AbstractType
             ->add('dateFinUtilisation',DateType::class, array(
         'format' => 'dd-MM-yyyy'
         ))
-            ->add('lieuReception', ChoiceType::class, array(
+            ->add('destination' , ChoiceType::class, array(
                 'Villes' => array(
                     'Paris',
                     'Lyon',
                     'Nantes',
                     'Autres',
-            )))
-            ->add('destination')
-            ->add('email')
+                )))
+            ->add('email', EmailType::class)
             ->add('personne')
-            ->add('voiture')
         ;
     }
 
