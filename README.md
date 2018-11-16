@@ -13,9 +13,9 @@ installer composer via cmder ou avec le <a href="https://www.hostinger.fr/tutori
 Pour Linux/Unix/MacOS :<br>
 Merci de suivre ce tuto en anglais pour l'installation de <a href="https://getcomposer.org/doc/00-intro.md#installation-linux-unix-macos" target="_blank">Composer via ligne de commande</a><br>
 <br>
--Une fois composer installer déplacer vous dans le dossier du projet faire un **"composer install"**, cela va permettre d'intaller les dépendances du projet<br><br>
--Allez sur la <a href="localhost/phpmyadmin" target="_blank">base de donné mysql en localhost</a> avec l'utilisateur **"root"** et le mdp **""** créer une base de données nommé **"bdd_gestion_vehicule"** encoder en **utf8mb4_unicode_ci**<br><br>
--Tout cela peut être modifier dans les fichiers **.env** et **doctrine.yaml**.
-Une fois cela effectuer faire un **"php bin\console do:mi:mi"** qui va permettre de faire la création de la base de donnée ainsi que les modifications apporter durant le projet.<br><br>
--Si vous avez besoin de créer des données virtuelles taper la commande **"php bin\console do:fi:lo"** sinon lancer la commande **"php bin\console se:ru"** de base symfony va lancer le projet en localhost avec le port 8000 si vous voulez changer cela ajouter l'adresse:port comme cela **"php bin\console localhost:8000'**
+-Une fois composer installer déplacer vous dans le dossier du projet faire un `composer install`, cela va permettre d'intaller les dépendances du projet<br><br>
+-Allez sur la <a href="localhost/phpmyadmin" target="_blank">base de donnée mysql en localhost</a> avec l'utilisateur **"root"** et le mdp **""** créer une base de données nommé **"bdd_gestion_vehicule"** encoder en **utf8mb4_unicode_ci**<br><br>
+-Ou avec la ligne de commande `php bin\console do:da:cr` qui vient créer la base de donnée avec les informations enregistrer dans les fichiers **.env** et **doctrine.yaml**.<br><br>
+Une fois cela effectuer faire un `php bin\console do:mi:mi` qui va permettre de faire la création des tables pour la base ainsi que les modifications apporter durant le projet.<br><br>
+-Si vous avez besoin de créer des données virtuelles taper la commande `php bin\console do:fi:lo` sinon lancer la commande `php bin\console se:ru` de base symfony va lancer le projet en localhost avec le port 8000 si vous voulez changer cela ajouter l'adresse:port comme cela **"php bin\console localhost:8000'**
 <br>
