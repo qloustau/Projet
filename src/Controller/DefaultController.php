@@ -123,7 +123,8 @@ class DefaultController extends AbstractController
             $entityManager->flush();
             // ... do any other work - like sending them an email, etc
             // maybe set a "flash" success message for the user
-            return $this->redirectToRoute('location',[$request->get('id')]);
+            return $this->redirectToRoute('home');
+            //return $this->redirectToRoute('location',['id' => $request->get('id')]);
         }
 
         return $this->render('default/location.html.twig', [
