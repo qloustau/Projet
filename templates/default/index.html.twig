@@ -12,7 +12,6 @@
         <div class="container">
             <div class="row">
     {% for voiture in voitures %}
-                <a href="{{ path('info',{"id":voiture.id})}}"  class="lien">
                     <div class="card col-lg-3">
                         <img class="card-img-top" src="{{ voiture.images }}" alt="Card image cap">
                         <div class="card-body">
@@ -20,10 +19,9 @@
                             <p class="card-text">{{ voiture.descriptif }}</p>
                             <p class="card-text">{{ voiture.kmtotal }} km</p>
 
-                            <a href="{{ path('location') }}" class="btn btn-primary">Réservation</a>
+                            <a href="{{ path('location',{"id":voiture.id}) }}" class="btn btn-primary">Réservation</a>
                         </div>
                     </div>
-                </a>
     {% endfor %}
             </div>
         </div>

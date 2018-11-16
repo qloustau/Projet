@@ -8,5 +8,6 @@
     {{ form_start(form) }}
     {{ form_widget(form) }}
     {{ form_end(form) }}
+    <button class="btn btn-primary"><a href="{{ path('info',{"id":voiture.id})}}">Réserver la voiture</a></button>
 {% endblock %}
 

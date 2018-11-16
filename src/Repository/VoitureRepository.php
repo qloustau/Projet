@@ -44,7 +44,7 @@ class VoitureRepository extends ServiceEntityRepository
 
         $query->setParameter('id', $id);
 
-        return $query->getResult();
+        return $query->getSingleResult();
     }
 
     public function recupererParLieuxDeReception(): array{

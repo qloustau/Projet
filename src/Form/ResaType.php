@@ -5,14 +5,13 @@ namespace App\Form;
 use App\Entity\Utilisation;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\FormInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Validator\Constraints\DateTime;
 
 class ResaType extends AbstractType
 {
@@ -44,14 +43,32 @@ class ResaType extends AbstractType
             ])
             ->add('email', EmailType::class)
             ->add('personne')
-            ->add('Envoyer', SubmitType::class)
         ;
+        if ($options['validation_groups'] == ['extern']){
+            $builder
+                ->add('nomPersonne',TextType::class, array(
+                    'label' => 'Votre Nom : ',
+                    'required' => true,
+                ))->add('prenomPersonne',TextType::class, array(
+                    'label' => 'Votre Prénom : ',
+                    'required' => true,
+                ));
+        }
+        $builder
+            ->add('Envoyer', SubmitType::class);
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
             'data_class' => Utilisation::class,
+            'validation_groups' => function(FormInterface $form){
+                if ($form->getData()->getEmail() === 'extern@gmail.com'){
+                    return ['extern'];
+                }else{
+                    return ['intern'];
+                }
+            },
         ]);
     }
 }

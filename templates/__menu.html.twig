@@ -9,8 +9,12 @@
 
                     {% if is_granted('IS_AUTHENTICATED_FULLY') %}
                         <p>Email: {{ app.user.email }}</p> |
-                        <p> Bonjour  {{ app.user.prenom }}</p>
-                        <li><a href="{{ path('logout') }}">Deconnexion</a></li>
+                        {% if app.user.email == 'extern@gmail.com' %}
+                            <p>Bonjour Externe</p>
+                        {% else %}
+                            <p> Bonjour  {{ app.user.prenom }}</p>
+                        {% endif %}
+                            <li><a href="{{ path('logout') }}">Deconnexion</a></li>
                     {% endif %}
                 </nav>
         </div>

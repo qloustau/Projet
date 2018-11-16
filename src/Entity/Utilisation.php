@@ -21,23 +21,66 @@ class Utilisation
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(
+     *     message = "Nature obligatoire !",
+     * )
+     * @Assert\Length(
+     *     min = 1,
+     *     max = 255
+     * )
      */
     private $nature;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
+     * @Assert\DateTime(
+     *     message = "Prénom de la personne qui conduit obligatoire !",
+     * )
      */
     private $dateDebutUtilisation;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
+     * @Assert\DateTime(
+     *     message = "Le champs doit etre une Date !",
+     * )
      */
     private $dateFinUtilisation;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Assert\Length(
+     *     min = 1,
+     *     max = 255
+     * )
      */
     private $destination;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     * @Assert\NotBlank(
+     *     message = "Le champs doit etre une Date !",
+     *     groups={"extern"}
+     * )
+     * @Assert\Length(
+     *     min = 1,
+     *     max = 255
+     * )
+     */
+    private $nomPersonne;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     * @Assert\NotBlank(
+     *     message = "Prénom de la personne qui conduit obligatoire !",
+     *     groups={"extern"}
+     * )
+     * @Assert\Length(
+     *     min = 1,
+     *     max = 255
+     * )
+     */
+    private $prenomPersonne;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Personne", inversedBy="utilisations")
@@ -53,6 +96,9 @@ class Utilisation
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Assert\Email(
+     *     message = "Le champs doit etre un email !",
+     * )
      */
     private $email;
 
@@ -118,6 +164,30 @@ class Utilisation
     public function setDestination(?string $destination): self
     {
         $this->destination = $destination;
+
+        return $this;
+    }
+
+    public function getNomPersonne(): ?string
+    {
+        return $this->nomPersonne;
+    }
+
+    public function setNomPersonne(?string $nomPersonne): self
+    {
+        $this->nomPersonne = $nomPersonne;
+
+        return $this;
+    }
+
+    public function getPrenomPersonne(): ?string
+    {
+        return $this->prenomPersonne;
+    }
+
+    public function setPrenomPersonne(?string $prenomPersonne): self
+    {
+        $this->prenomPersonne = $prenomPersonne;
 
         return $this;
     }

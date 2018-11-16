@@ -6,6 +6,7 @@ use App\Entity\Utilisation;
 use App\Entity\Voiture;
 use App\Form\ResaType;
 use App\Form\LieuReceptionType;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -69,10 +70,8 @@ class DefaultController extends AbstractController
 
         $voiture = $repository->infoPourChaqueVoiture($request->get('id'));
 
-        dump($voiture);
-
         return $this->render('default/info.html.twig', [
-            'voitures' => $voiture,
+            'voiture' => $voiture,
         ]);
     }
 
@@ -87,12 +86,32 @@ class DefaultController extends AbstractController
     }
 
     /**
-     * @Route("/location", name="location")
+     * @Route("/location/{id}", name="location")
+     * @Security("has_role('ROLE_USER')")
      */
     public function locationPage(Request $request)
     {
         $utilisation = New Utilisation();
-        $form = $this->createForm(ResaType::class, $utilisation);
+        $utilisation->setPersonne($this->getUser());
+
+        $repository = $this->getDoctrine()
+            ->getRepository(Voiture::class)
+        ;
+
+        $voiture = $repository->infoPourChaqueVoiture($request->get('id'));
+
+        if ($this->getUser()->getEmail() == 'extern@gmail.com'){
+            $form = $this->createForm(ResaType::class, $utilisation, [
+                'validation_groups' => 'extern',
+            ]);
+        }
+        else {
+            $form = $this->createForm(ResaType::class, $utilisation, [
+                'validation_groups' => 'intern',
+            ]);
+        }
+
+
 
         $form->handleRequest($request);
 
@@ -104,11 +123,12 @@ class DefaultController extends AbstractController
             $entityManager->flush();
             // ... do any other work - like sending them an email, etc
             // maybe set a "flash" success message for the user
-            return $this->redirectToRoute('location');
+            return $this->redirectToRoute('location',[$request->get('id')]);
         }
 
         return $this->render('default/location.html.twig', [
             'form' => $form->createView(),
+            'voiture' => $voiture,
         ]);
     }
 

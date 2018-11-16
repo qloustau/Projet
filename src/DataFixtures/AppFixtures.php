@@ -99,7 +99,6 @@ class AppFixtures extends Fixture
         $user->setPrenom('John');
         $user->setEmail('test@gmail.com');
         $user->addRole($RoleUser);
-
         $password = $this->encoder->encodePassword($user, 'test');
         $user->setMdp($password);
 
@@ -108,12 +107,19 @@ class AppFixtures extends Fixture
         $admin->setPrenom('Admin');
         $admin->setEmail('admin@gmail.com');
         $admin->addRole($RoleAdmin);
-
         $password = $this->encoder->encodePassword($admin, 'admin');
         $admin->setMdp($password);
 
+        $extern = new Personne();
+        $extern->setEmail('extern@gmail.com');
+        $extern->addRole($RoleUser);
+
+        $password = $this->encoder->encodePassword($extern, 'extern');
+        $extern->setMdp($password);
+
         $manager->persist($admin);
         $manager->persist($user);
+        $manager->persist($extern);
         $manager->flush();
     }
 }

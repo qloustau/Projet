@@ -2,6 +2,8 @@
 
 Prérequis
 ------------
+Version Php: 7.2<br>
+Version Mysql: 5.7<br>
 Php installer sur le pc via <a href="http://www.cndp.fr/crdp-dijon/Installer-et-configurer-Wampserver.html" target="_blank">Wamp</a> si cela n'est pas déjà fait
 
 Installation
