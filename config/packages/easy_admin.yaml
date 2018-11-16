@@ -1,0 +1,28 @@
+easy_admin:
+    entities:
+        Personne:
+            class: App\Entity\Personne
+            export_path: '%kernel.project_dir/var/export/user'
+            password_encoding: { algorithm: 'bcrypt', cost: 12 }
+
+            form:  # <-- 'form' is applied to both 'new' and 'edit' views
+                fields:
+                - { property: 'nom', type: 'text', label: 'Nom' }
+                - { property: 'prenom', type: 'text', label: 'Prenom' }
+                - { property: 'email', type: 'email', label: 'Email' }
+                - { property: 'mdp', type: 'password', label: 'Mot de passe' }
+
+        Voiture:
+            class: App\Entity\Voiture
+            form:  # <-- 'form' is applied to both 'new' and 'edit' views
+                fields:
+                - { property: 'immat', type: 'text', label: 'Immatriculation' }
+                - { property: 'marque', type: 'text', label: 'Marque du vehicule' }
+                - { property: 'kmtotal', type: 'text', label: 'Km du vehicule' }
+                - { property: 'reservoir', type: 'choice', label: 'Resevoir (25,50,100)' }
+        Commentaire:
+            class: App\Entity\Commentaire
+
+
+    site_name: 'Eni gestion vehicule'
+

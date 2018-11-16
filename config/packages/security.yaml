@@ -2,6 +2,8 @@ security:
   encoders:
     App\Entity\Personne:
       algorithm: argon2i
+    EasyCorp\Bundle\EasyAdminBundle\EasyAdminBundle:
+      algorithm: argon2i
 
   # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
   providers:
@@ -47,7 +49,7 @@ security:
   # Easy way to control access for large sections of your site
   # Note: Only the *first* access control that matches will be used
   access_control:
-  # - { path: ^/admin, roles: ROLE_ADMIN }
+    - { path: ^/mon_interface, roles: ROLE_ADMIN }
   # - { path: ^/profile, roles: ROLE_USER }
 
 
